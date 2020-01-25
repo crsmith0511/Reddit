@@ -1,23 +1,35 @@
-// 1. Creating a New Post
-    /* How it should look:
-        (Header) Add a New Post not enclosure, not boxed.
-        (Text Field) Post Text box takes up whole line.
-        (Text Field) Your Name takes up whole line.
-        (Button) Post Button.*/
+1. Creating a New Post
+    How it should look:
+    (Header) Add a New Post not enclosure, not boxed.
+    (Text Field) Post Text box takes up whole line.
+    (Text Field) Your Name takes up whole line.
+     (Button) Post Button.
 
-// 2. Creating a Post: how it gets displayed to the screen.
-    /* Post gets display.
+           <div class="post">
+                <p class="post-text"></p>
+                    <div>
+                        <ul class="comment-list" style="list-style-type:none">
+                            <li class="comments"></li>
+                        </ul>
+                    </div>
+                <div></div>
+                <p class="post-creator"></p>
+            </div>
+
+2. Creating a Post: how it gets displayed to the screen.
+    Post gets display.
     Look:
     Remove (link) Comments (link) Post Text.
-    */
 
-// 3. Comment Section that toggles open and close when the comment link is clciked on next to post.
-    /* ALL SAME LINE 
+
+3. Comment Section that toggles open and close when the comment link is clciked on next to post.
+    ALL SAME LINE 
     [Comment Text]  [User Name] Post Comment (button)
-    */
 
-// 4. Comment Adder 
-    /* Once fields clicked and Post comment button is clicked
-    Comments appear directly underneath posts
-    Comment Posted By: Name X(button)
-    */
+4. Comment Adder 
+    -Once fields clicked and Post comment button is clicked
+    -Comments appear directly underneath posts
+    -Comment Posted By: Name X(button)
+
+
+    Add a comment to the middle one to make sure you are done.
