@@ -59,8 +59,13 @@ var renderPosts = function(){
 }
 console.log(posts)
 
+// $('.post-thread').on('click', '#submit-comment', function(){
+//     var postId = $(this).data('submit')
+//     console.log(postId)
+// })
+
 // when the post button gets clicked id="submit-post"
-var addNewComment = $('.post-container').on('click', '#submit-comment', function(){
+var addNewComment = $('.post-thread').on('click', '#submit-comment', function(){
     var postId = $(this).data('submit')
     
     console.log(index)
