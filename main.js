@@ -12,10 +12,10 @@ var addNewPost = $('#submit-post').on('click', function(){
         alert('Please fill in all fields before clicking Post.')
         //check to see if post text is blank
     } else if(submittedPostText === '' && submittedYourName){
-        alert('Please fill out the post text')
+        alert('Please fill in the Post Text box before clicking Post.')
         //checks to see if your name is blank
     } else if(submittedPostText && submittedYourName === ''){
-        alert('Please fill in your name.')
+        alert('Please fill in the Your Name box before clicking Post.')
     } else {
         //store it in an object if ALL fields are filled out, so no objects get made with undefined values.
         var newSubmittedPost = {
@@ -68,7 +68,7 @@ console.log(posts)
 var addNewComment = $('.post-thread').on('click', '#submit-comment', function(){
     var postId = $(this).data('submit')
     
-    console.log(index)
+    console.log(postId)
     //grabs comment text
     var submittedCommentText = $('#comment-text').val()
     //grabs user name
@@ -76,13 +76,13 @@ var addNewComment = $('.post-thread').on('click', '#submit-comment', function(){
 
     //check to see if both text fields are blank.
     if(submittedCommentText === '' && submittedUserName === ''){
-        alert('Please fill in all fields before clicking Post.')
+        alert('Please fill in all fields before clicking Post Comment.')
         //check to see if comment text is blank
     } else if(submittedCommentText === '' && submittedUserName){
-        alert('Please fill out the post text')
+        alert('Please fill in the Comment Text box before clicking Post Comment.')
         //checks to see if user name is blank
     } else if(submittedCommentText && submittedUserName === ''){
-        alert('Please fill in your name.')
+        alert('Please fill in the User Name box before clicking Post Comment.')
     } else {
         //store it in an object if ALL fields are filled out, so no objects get made with undefined values.
         var newCommentPost = {
