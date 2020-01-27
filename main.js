@@ -35,7 +35,6 @@ var renderPosts = function(){
     //finds the <div> that template or each post will be appended to. 
     // In this case it is the div that has the class of post-thread view.
     var $postThreadView = $('.post-thread-view')
-
     //This is emptying out the div container so the loop can add each new post and have no dups.
     $postThreadView.empty()
 
@@ -46,10 +45,10 @@ var renderPosts = function(){
         +   '<a class="comment-on-post" data-comment="' + i + '">' + 'Comment' + '</a>'
         +   '<p class="post-text">' + posts[i].postText + '</p>'
         +       '<div class="comment-container" data-number="' + i + '">'
-        +           '<ul class="comment-section" data-comment-container="' + i + '">' + '</ul>'
-        +           '<input id="comment-text" type="text" class="comment-control" placeholder="Comment Text">' + '</input>'
-        +           '<input id="user-name" type="text" class="comment-control" placeholder="User Name">' + '</input>'
-        +           '<button id="submit-comment" data-submit="' + i + '">' + 'Post Comment' + '</button>'
+        +           '<ul class="comment-section" style="list-style-type:non" data-comment-container="' + i + '">' + '</ul>'
+        +           '<input class="comment-text" type="text" placeholder="Comment Text" data-comment-input="' + i + '">' + '</input>'
+        +           '<input class="user-name" type="text" placeholder="User Name" data-user-name="' + i + '">' + '</input>'
+        +           '<button type="button" class=" btn btn-primary submit-comment" data-submit="' + i + '">' + 'Post Comment' + '</button>'
         +       '</div>'
         +   '<p class="post-creator">' + 'Post By: ' + posts[i].postCreator  + '</p>'
         +'</div>';
@@ -57,33 +56,28 @@ var renderPosts = function(){
       $postThreadView.append($template)
     }
 }
-console.log(posts)
-
-// $('.post-thread').on('click', '#submit-comment', function(){
-//     var postId = $(this).data('submit')
-//     console.log(postId)
-// })
 
 // when the post button gets clicked id="submit-post"
-var addNewComment = $('.post-thread').on('click', '#submit-comment', function(){
-    var postId = $(this).data('submit')
+var addNewComment = $('.post-thread').on('click', '.submit-comment', function(){
+    var postIndex = $(this).data('submit')
     
-    console.log(postId)
+    
     //grabs comment text
-    var submittedCommentText = $('#comment-text').val()
+    var submittedCommentText = $('.comment-text').eq(postIndex).val()
+    console.log(submittedCommentText)
     //grabs user name
-    var submittedUserName = $('#user-name').val()
+    var submittedUserName = $('.user-name').eq(postIndex).val()
 
     //check to see if both text fields are blank.
-    if(submittedCommentText === '' && submittedUserName === ''){
-        alert('Please fill in all fields before clicking Post Comment.')
-        //check to see if comment text is blank
-    } else if(submittedCommentText === '' && submittedUserName){
-        alert('Please fill in the Comment Text box before clicking Post Comment.')
-        //checks to see if user name is blank
-    } else if(submittedCommentText && submittedUserName === ''){
-        alert('Please fill in the User Name box before clicking Post Comment.')
-    } else {
+    // if(submittedCommentText === '' && submittedUserName === ''){
+    //     alert('Please fill in all fields before clicking Post Comment.')
+    //     //check to see if comment text is blank
+    // } else if(submittedCommentText === '' && submittedUserName){
+    //     alert('Please fill in the Comment Text box before clicking Post Comment.')
+    //     //checks to see if user name is blank
+    // } else if(submittedCommentText && submittedUserName === ''){
+    //     alert('Please fill in the User Name box before clicking Post Comment.')
+    // } else {
         //store it in an object if ALL fields are filled out, so no objects get made with undefined values.
         var newCommentPost = {
             commentText: submittedCommentText,
@@ -91,16 +85,42 @@ var addNewComment = $('.post-thread').on('click', '#submit-comment', function(){
         }
        console.log(newCommentPost)
         //need to push object to the posts[correct index].commentThread
-    }
-    
-})
+        posts[postIndex]['commentThread'].push(newCommentPost)
 
+      renderComments  
+});
 
+var renderComments = $('.post-thread').on('click', '.submit-comment', function(){
+    var index = $(this).data('submit')
+    var $commentThreadView = $('.comment-section').eq(index);
+
+    $commentThreadView.empty();
+
+    posts[index]['commentThread'].forEach(function(comment){
+        var $commentTemplate =
+        '<li class=comments">' + comment.commentText + ' Posted By: ' 
+        + comment.commentCreator + '<a class="comments-removed">' + ' x' + '</a>'
+        $commentThreadView.append($commentTemplate)
+    })
+
+    //    for(let i = 0; i < posts[i]['commentThread'].length; i++){
+    //     var $commentTemplate =
+    //     '<li data-comment-index="' + i + '">' + posts[i]['commentThread'][i].commentText + ' Posted By: ' 
+    //     + posts[i]['commentThread'][i].commentCreator + '<a data-comment-remove="' + i + '">' + ' x' + '</a>'
+    //     $commentThreadView.append($commentTemplate)
+    // }   
+});
+ 
 
 $(".post-thread").on('click', '.remove-post', function(){
     var removePostid= $(this).data('remove')
+    console.log(removePostid)
     // Need to remove post from the posts array by index
     // re-render posts?
+    // delete posts[0]
+    posts.splice(removePostid, 1)
+    // console.log(rem)
+    renderPosts()
    
 })
 
@@ -110,4 +130,4 @@ $(".post-thread").on('click', '.comment-on-post', function(){
     
     $('.comment-container').eq(commentOnid).toggle()
 
-})
+});
