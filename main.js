@@ -116,6 +116,7 @@ $(".post-thread").on('click', '.comment-on-post', function(){
     var commentOnIndex = $(this).data('comment')
     
     $('.comment-container').eq(commentOnIndex).toggle()
+
 });
 
 $('.post-thread').on('click', '.remove-comment', function(){
